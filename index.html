@@ -26,6 +26,39 @@
           border-color: white;
         }
       }
+      #snakeCanvas {
+        border: 1px solid black;
+        display: block;
+        margin-top: 10px;
+      }
+      @media (prefers-color-scheme: dark) {
+        #snakeCanvas {
+          border-color: white;
+        }
+      }
+      .glitch {
+        animation: glitch 0.3s infinite;
+      }
+      @keyframes glitch {
+        0% {
+          transform: translate(0);
+        }
+        20% {
+          transform: translate(-2px, 2px);
+        }
+        40% {
+          transform: translate(-2px, -2px);
+        }
+        60% {
+          transform: translate(2px, 2px);
+        }
+        80% {
+          transform: translate(2px, -2px);
+        }
+        100% {
+          transform: translate(0);
+        }
+      }
       @media (prefers-color-scheme: dark) {
         body {
           background-color: black;
@@ -83,6 +116,13 @@
         <input type="number" id="guessInput" min="1" max="10" style="width: 50px" />
         <button onclick="checkGuess()" style="cursor: pointer">guess</button>
         <span id="guessResult"></span>
+      </p>
+
+      <p>
+        <strong>snake:</strong><br />
+        <button onclick="startSnake()" style="cursor: pointer">start</button>
+        <span id="snakeScore">score: 0</span>
+        <canvas id="snakeCanvas" width="300" height="300"></canvas>
       </p>
 
       <script>
@@ -152,6 +192,162 @@
             result.textContent = 'lower'
           }
         }
+
+        // Snake game
+        const canvas = document.getElementById('snakeCanvas')
+        const ctx = canvas.getContext('2d')
+        const gridSize = 15
+        const tileCount = 20
+        let snake = [{ x: 10, y: 10 }]
+        let dx = 0
+        let dy = 0
+        let food = { x: 5, y: 5 }
+        let score = 0
+        let gameLoop = null
+        let gameRunning = false
+
+        function startSnake() {
+          if (gameRunning) return
+          snake = [{ x: 10, y: 10 }]
+          dx = 1
+          dy = 0
+          score = 0
+          gameRunning = true
+          document.getElementById('snakeScore').textContent = 'score: 0'
+          spawnFood()
+          if (gameLoop) clearInterval(gameLoop)
+          gameLoop = setInterval(updateSnake, 100)
+        }
+
+        function updateSnake() {
+          let head = { x: snake[0].x + dx, y: snake[0].y + dy }
+
+          // Wrap around walls
+          if (head.x < 0) head.x = tileCount - 1
+          if (head.x >= tileCount) head.x = 0
+          if (head.y < 0) head.y = tileCount - 1
+          if (head.y >= tileCount) head.y = 0
+
+          // Self collision
+          for (let segment of snake) {
+            if (head.x === segment.x && head.y === segment.y) {
+              endSnake()
+              return
+            }
+          }
+
+          snake.unshift(head)
+
+          // Food collision
+          if (head.x === food.x && head.y === food.y) {
+            score++
+            document.getElementById('snakeScore').textContent = 'score: ' + score
+            spawnFood()
+          } else {
+            snake.pop()
+          }
+
+          drawSnake()
+        }
+
+        function drawSnake() {
+          // Clear canvas
+          ctx.fillStyle = getComputedStyle(document.body).backgroundColor
+          ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+          // Draw snake
+          ctx.fillStyle = getComputedStyle(document.body).color
+          for (let segment of snake) {
+            ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize - 1, gridSize - 1)
+          }
+
+          // Draw food
+          ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize - 1, gridSize - 1)
+        }
+
+        function spawnFood() {
+          food = {
+            x: Math.floor(Math.random() * tileCount),
+            y: Math.floor(Math.random() * tileCount),
+          }
+          // Make sure food doesn't spawn on snake
+          for (let segment of snake) {
+            if (food.x === segment.x && food.y === segment.y) {
+              spawnFood()
+              return
+            }
+          }
+        }
+
+        function endSnake() {
+          gameRunning = false
+          clearInterval(gameLoop)
+          document.getElementById('snakeScore').textContent = 'score: ' + score + ' (game over)'
+        }
+
+        // Snake controls
+        document.addEventListener('keydown', (e) => {
+          if (!gameRunning) return
+          if (e.key === 'ArrowUp' && dy === 0) {
+            dx = 0
+            dy = -1
+          }
+          if (e.key === 'ArrowDown' && dy === 0) {
+            dx = 0
+            dy = 1
+          }
+          if (e.key === 'ArrowLeft' && dx === 0) {
+            dx = -1
+            dy = 0
+          }
+          if (e.key === 'ArrowRight' && dx === 0) {
+            dx = 1
+            dy = 0
+          }
+        })
+
+        // Konami code easter egg
+        const konamiCode = [
+          'ArrowUp',
+          'ArrowUp',
+          'ArrowDown',
+          'ArrowDown',
+          'ArrowLeft',
+          'ArrowRight',
+          'ArrowLeft',
+          'ArrowRight',
+          'b',
+          'a',
+        ]
+        let konamiIndex = 0
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === konamiCode[konamiIndex]) {
+            konamiIndex++
+            if (konamiIndex === konamiCode.length) {
+              triggerKonami()
+              konamiIndex = 0
+            }
+          } else {
+            konamiIndex = 0
+          }
+        })
+
+        function triggerKonami() {
+          const body = document.body
+          body.classList.add('glitch')
+
+          const originalText = document.querySelector('h1').textContent
+          document.querySelector('h1').textContent = '4rh4m j41n'
+
+          setTimeout(() => {
+            body.classList.remove('glitch')
+            document.querySelector('h1').textContent = originalText
+          }, 2000)
+        }
+
+        // Initial draw
+        drawSnake()
       </script>
     </div>
   </body>
