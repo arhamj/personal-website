@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Saar — Gita &amp; Reflection</title>
+<meta name="description" content="A 1-minute daily Bhagavad Gita ritual. One verse. One minute of reflection. Every day.">
+<meta property="og:title" content="Saar — Gita &amp; Reflection">
+<meta property="og:description" content="A 1-minute daily Bhagavad Gita ritual. One verse. One minute. Every day.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://arhmjn.com/saar/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Raleway:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAF6F1;
+    --surface: #F0E9DF;
+    --text: #2A2420;
+    --text-secondary: #887D73;
+    --primary: #8B6F4E;
+    --gold: #B8860B;
+    --divider: #DDD5C9;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0F0D0A;
+      --surface: #1B1815;
+      --text: #EDE8DF;
+      --text-secondary: #A59A8E;
+      --primary: #C4A67D;
+      --gold: #D4A849;
+      --divider: #2C2822;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: "Raleway", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.65;
+    padding: 60px 22px 64px;
+  }
+
+  .container {
+    max-width: 560px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .wordmark {
+    font-family: "Playfair Display", Georgia, serif;
+    font-weight: 700;
+    font-size: 36px;
+    letter-spacing: 0.42em;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin: 0 0 8px;
+  }
+
+  .subtitle {
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin: 0 0 40px;
+  }
+
+  .ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 0 0 48px;
+  }
+  .ornament .line {
+    flex: 0 0 64px;
+    height: 1px;
+    background: var(--divider);
+  }
+  .ornament .dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.85;
+  }
+
+  .hero-tagline {
+    font-family: "Playfair Display", Georgia, serif;
+    font-weight: 600;
+    font-style: italic;
+    font-size: 26px;
+    line-height: 1.35;
+    margin: 0 0 24px;
+    color: var(--text);
+  }
+
+  .hero-blurb {
+    font-size: 17px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin: 0 0 56px;
+  }
+
+  .feature-list {
+    text-align: left;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 56px;
+  }
+  .feature-list li {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--divider);
+  }
+  .feature-list li:last-child {
+    border-bottom: none;
+  }
+  .feature-list .feature-title {
+    display: block;
+    font-family: "Playfair Display", Georgia, serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--text);
+    margin: 0 0 6px;
+  }
+  .feature-list .feature-detail {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .coming-soon {
+    display: inline-block;
+    padding: 14px 28px;
+    background: var(--surface);
+    border: 1px solid var(--divider);
+    border-radius: 999px;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    margin: 0 0 56px;
+  }
+  .coming-soon .label {
+    color: var(--gold);
+    font-style: italic;
+    text-transform: lowercase;
+    margin-right: 10px;
+    letter-spacing: 0.08em;
+  }
+
+  .footer-links {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--divider);
+    color: var(--text-secondary);
+    font-size: 13px;
+  }
+  .footer-links a {
+    color: var(--primary);
+    text-decoration: none;
+    margin: 0 10px;
+    border-bottom: 1px solid color-mix(in srgb, var(--primary) 40%, transparent);
+    transition: border-color 0.15s ease;
+  }
+  .footer-links a:hover { border-bottom-color: var(--primary); }
+
+  .footer-tagline {
+    margin-top: 28px;
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <p class="wordmark">Saar</p>
+    <p class="subtitle">Verse &amp; Reflection</p>
+
+    <div class="ornament">
+      <span class="line"></span>
+      <span class="dot"></span>
+      <span class="line"></span>
+    </div>
+
+    <p class="hero-tagline">One verse. One minute. Every day.</p>
+
+    <p class="hero-blurb">A calm, daily ritual built around the Bhagavad Gita. Sanskrit, transliteration, translation, and a short reflection &mdash; all in your pocket.</p>
+
+    <ul class="feature-list">
+      <li>
+        <span class="feature-title">A verse a day</span>
+        <span class="feature-detail">One curated verse, delivered each morning. Sanskrit, transliteration, translation, and a short commentary.</span>
+      </li>
+      <li>
+        <span class="feature-title">All 700 verses</span>
+        <span class="feature-detail">Eighteen chapters, organised for unhurried browsing whenever you want to roam.</span>
+      </li>
+      <li>
+        <span class="feature-title">Mood guidance</span>
+        <span class="feature-detail">Pick how you feel. A verse meets you there &mdash; anxiety, gratitude, low motivation, anywhere in between.</span>
+      </li>
+      <li>
+        <span class="feature-title">A weekly streak</span>
+        <span class="feature-detail">A quiet calendar of your practice. No badges, no shouting &mdash; just a thread you keep returning to.</span>
+      </li>
+      <li>
+        <span class="feature-title">Home-screen widget</span>
+        <span class="feature-detail">Pin a verse to your home screen. Carry the day&rsquo;s words wherever you go.</span>
+      </li>
+    </ul>
+
+    <p class="coming-soon"><span class="label">soon</span>Coming to the App Store</p>
+
+    <div class="footer-links">
+      <a href="about/privacy.html">Privacy</a>
+      <a href="about/terms.html">Terms</a>
+      <a href="about/licenses.html">Open Source</a>
+    </div>
+
+    <p class="footer-tagline">Read slowly. Read once a day.</p>
+
+  </div>
+</body>
+</html>
