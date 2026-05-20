@@ -145,24 +145,21 @@
     line-height: 1.6;
   }
 
-  .coming-soon {
+  .appstore-link {
     display: inline-block;
-    padding: 14px 28px;
-    background: var(--surface);
-    border: 1px solid var(--divider);
-    border-radius: 999px;
-    color: var(--text);
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
     margin: 0 0 56px;
+    transition: opacity 0.15s ease;
   }
-  .coming-soon .label {
-    color: var(--gold);
-    font-style: italic;
-    text-transform: lowercase;
-    margin-right: 10px;
-    letter-spacing: 0.08em;
+  .appstore-link:hover { opacity: 0.85; }
+  .appstore-badge {
+    height: 56px;
+    width: auto;
+    display: block;
+  }
+  .appstore-badge-dark { display: none; }
+  @media (prefers-color-scheme: dark) {
+    .appstore-badge-light { display: none; }
+    .appstore-badge-dark { display: block; }
   }
 
   .footer-links {
@@ -228,7 +225,10 @@
       </li>
     </ul>
 
-    <p class="coming-soon"><span class="label">soon</span>Coming to the App Store</p>
+    <a href="https://apps.apple.com/app/saar-gita-reflection/id6770287265" class="appstore-link" target="_blank" rel="noopener" aria-label="Download Saar on the App Store">
+      <img class="appstore-badge appstore-badge-light" src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
+      <img class="appstore-badge appstore-badge-dark" src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us?size=250x83" alt="Download on the App Store">
+    </a>
 
     <div class="footer-links">
       <a href="about/privacy.html">Privacy</a>
